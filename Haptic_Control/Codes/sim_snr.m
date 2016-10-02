@@ -20,9 +20,13 @@ Z_e = dataID.m * s;
 Z_psea = (Z_e * (Z_h + k * dataID.n * C/s + kk) + kk * (Z_h + dataID.n * C * Z_ve))/(Z_h + k * dataID.n * C/s + kk);
 
 % Add sinusoidal signal with white noise of snr = 10 to the linear model
-t = linspace(0, 10, 10001); % time step chosen to be ~ 0.001
+t = linspace(0, 60, 60001); % time step chosen to be ~ 0.001
 f0 = ones(length(t), 1);
-fi = awgn(f0, 10, 0); % the measured loadCellForceA
+% f0 = zeros(length(t), 1);
+% fi = awgn(f0, 5, 0); % the measured loadCellForceA
+fi = f0;
+% f0 = wgn(length(t), 1, 10);
+% fi = f0;
 uo_adm = lsim(1/Z_padm, fi, t);
 uo_sea = lsim(1/Z_psea, fi, t);
 %figure(1);
